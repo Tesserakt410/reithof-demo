@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useToast } from '../context/ToastContext';
 import Hero from '../components/sections/Hero';
 import OfferCards from '../components/sections/OfferCards';
 import TrustSection from '../components/sections/TrustSection';
@@ -8,6 +9,7 @@ import dressurImg from '../assets/images/dressur.jpg';
 
 export default function Home() {
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
   return (
     <div className="pt-[100px] md:pt-[120px]"> {/* Offset for fixed header */}
@@ -18,7 +20,7 @@ export default function Home() {
         description="Entdecken Sie die Freude am Reiten in familiärer Atmosphäre. Von der ersten Reitstunde bis zum Turniererfolg begleiten wir Sie auf Ihrem Weg."
         primaryCTA={{
           text: 'Probestunde vereinbaren',
-          onClick: () => navigate('/kontakt'),
+          onClick: () => showToast('Dies ist eine Demo-Website. Bis zur Ausarbeitung steht diese Funktion nicht zur Verfügung.'),
         }}
         secondaryCTA={{
           text: 'Mehr erfahren',
@@ -96,7 +98,7 @@ export default function Home() {
                   </li>
                 </ul>
                 <button
-                  onClick={() => navigate('/wir-ueber-uns')}
+                  onClick={() => showToast('Dies ist eine Demo-Website. Bis zur Ausarbeitung steht diese Funktion nicht zur Verfügung.')}
                   className="text-primary-600 font-semibold hover:text-primary-700 transition-colors inline-flex items-center gap-2"
                 >
                   Mehr über uns erfahren

@@ -50,6 +50,7 @@ export default {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         heading: ['Outfit', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         body: ['Source Sans Pro', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        logo: ['Great Vibes', 'Parisienne', 'cursive'],
       },
       fontSize: {
         'display-lg': ['4rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],

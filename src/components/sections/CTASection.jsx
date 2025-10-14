@@ -3,9 +3,11 @@ import { Phone, Mail, MapPin } from 'lucide-react';
 import Button from '../common/Button';
 import { slideUp } from '../../utils/animations';
 import { useNavigate } from 'react-router-dom';
+import { useToast } from '../../context/ToastContext';
 
 export default function CTASection() {
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
   return (
     <section className="py-16 md:py-24 bg-gradient-to-br from-primary-600 to-primary-700 text-white relative overflow-hidden">
@@ -60,7 +62,7 @@ export default function CTASection() {
             </a>
 
             <button
-              onClick={() => navigate('/kontakt')}
+              onClick={() => showToast('Dies ist eine Demo-Website. Bis zur Ausarbeitung steht diese Funktion nicht zur Verfügung.')}
               className="flex flex-col items-center gap-3 p-6 bg-white/10 backdrop-blur-sm rounded-2xl hover:bg-white/20 transition-all group"
             >
               <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -78,7 +80,7 @@ export default function CTASection() {
             <Button
               variant="light"
               size="lg"
-              onClick={() => navigate('/kontakt')}
+              onClick={() => showToast('Dies ist eine Demo-Website. Bis zur Ausarbeitung steht diese Funktion nicht zur Verfügung.')}
               className="min-w-[200px]"
             >
               Probestunde vereinbaren
@@ -86,7 +88,7 @@ export default function CTASection() {
             <Button
               variant="outline"
               size="lg"
-              onClick={() => navigate('/reitunterricht')}
+              onClick={() => showToast('Dies ist eine Demo-Website. Bis zur Ausarbeitung steht diese Funktion nicht zur Verfügung.')}
               className="min-w-[200px] border-white text-white hover:bg-white hover:text-primary-600"
             >
               Mehr erfahren

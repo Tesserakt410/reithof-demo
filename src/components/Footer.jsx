@@ -1,17 +1,27 @@
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Facebook, Heart } from 'lucide-react';
+import { useToast } from '../context/ToastContext';
 
 export default function Footer() {
+  const { showToast } = useToast();
+
   const quickLinks = [
-    { name: 'Über uns', href: '/wir-ueber-uns' },
-    { name: 'Aktuelles', href: '/aktuelles' },
-    { name: 'Reiterstüberl', href: '/reitstube' },
-    { name: 'Empfehlungen', href: '/empfehlungen' },
+    { name: 'Über uns', href: '/wir-ueber-uns', implemented: false },
+    { name: 'Aktuelles', href: '/aktuelles', implemented: false },
+    { name: 'Reiterstüberl', href: '/reitstube', implemented: false },
+    { name: 'Empfehlungen', href: '/empfehlungen', implemented: false },
   ];
 
+  const handleLinkClick = (e, link) => {
+    if (!link.implemented) {
+      e.preventDefault();
+      showToast('Dies ist eine Demo-Website. Bis zur Ausarbeitung steht diese Funktion nicht zur Verfügung.');
+    }
+  };
+
   const legalLinks = [
-    { name: 'Impressum', href: '/impressum' },
-    { name: 'Datenschutz', href: '/datenschutz' },
+    { name: 'Impressum', href: '/impressum', implemented: false },
+    { name: 'Datenschutz', href: '/datenschutz', implemented: false },
   ];
 
   return (
@@ -21,8 +31,8 @@ export default function Footer() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand Section */}
           <div className="lg:col-span-1">
-            <h3 className="text-2xl font-heading font-bold mb-4">
-              Reitstall <span className="text-accent-400">Marienberg</span>
+            <h3 className="text-3xl md:text-4xl font-logo text-white mb-4 leading-tight">
+              Reitstall Marienberg
             </h3>
             <p className="text-gray-300 leading-relaxed mb-4">
               Reiten lernen im Einklang mit der Natur. Seit über 20 Jahren Ihr Partner für
@@ -74,6 +84,7 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     to={link.href}
+                    onClick={(e) => handleLinkClick(e, link)}
                     className="text-gray-300 hover:text-accent-400 transition-colors inline-block"
                   >
                     {link.name}
@@ -83,19 +94,12 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Inhaber & Banking */}
+          {/* Inhaber */}
           <div>
             <h4 className="text-lg font-heading font-bold mb-4">Inhaber</h4>
             <div className="text-gray-300 space-y-2">
               <p className="font-medium text-white">Alfred Schmitt</p>
               <p className="text-sm">Pferdewirtschaftsmeister</p>
-              <div className="pt-4 mt-4 border-t border-gray-700">
-                <p className="text-sm">
-                  <span className="text-gray-400">IBAN:</span>
-                  <br />
-                  <span className="font-mono text-xs">DE82 7605 0101 0014 9195 83</span>
-                </p>
-              </div>
             </div>
           </div>
         </div>
@@ -113,6 +117,7 @@ export default function Footer() {
                 <Link
                   key={link.name}
                   to={link.href}
+                  onClick={(e) => handleLinkClick(e, link)}
                   className="hover:text-accent-400 transition-colors"
                 >
                   {link.name}

@@ -4,9 +4,11 @@ import Card, { CardTitle, CardDescription, CardFooter } from '../common/Card';
 import Button from '../common/Button';
 import { staggerContainer, staggerItem } from '../../utils/animations';
 import { useNavigate } from 'react-router-dom';
+import { useToast } from '../../context/ToastContext';
 
 export default function OfferCards() {
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
   const offers = [
     {
@@ -15,6 +17,7 @@ export default function OfferCards() {
       description: 'Professioneller Unterricht für Anfänger und Fortgeschrittene. Von der ersten Reitstunde bis zum Turniererfolg begleiten wir Sie.',
       href: '/reitunterricht',
       color: 'from-primary-50 to-primary-100/50',
+      implemented: false,
     },
     {
       icon: <Home size={40} className="text-accent-500" />,
@@ -22,6 +25,7 @@ export default function OfferCards() {
       description: 'Boxenvermietung, professioneller Beritt und Verkaufspferde. Ihr Pferd ist bei uns in den besten Händen.',
       href: '/pferde-stall',
       color: 'from-accent-50 to-accent-100/50',
+      implemented: false,
     },
     {
       icon: <Camera size={40} className="text-wood-500" />,
@@ -29,6 +33,7 @@ export default function OfferCards() {
       description: 'Erleben Sie unseren Hof hautnah. Familiäre Atmosphäre, gemütliches Reiterstüberl und eine lebendige Gemeinschaft.',
       href: '/galerie',
       color: 'from-wood-400/10 to-wood-500/20',
+      implemented: true,
     },
   ];
 
@@ -80,7 +85,13 @@ export default function OfferCards() {
                         variant="ghost"
                         icon={<ArrowRight size={18} />}
                         iconPosition="right"
-                        onClick={() => navigate(offer.href)}
+                        onClick={() => {
+                          if (offer.implemented) {
+                            navigate(offer.href);
+                          } else {
+                            showToast('Dies ist eine Demo-Website. Bis zur Ausarbeitung steht diese Funktion nicht zur Verfügung.');
+                          }
+                        }}
                         className="w-full justify-center group-hover:bg-white/50"
                       >
                         Mehr erfahren

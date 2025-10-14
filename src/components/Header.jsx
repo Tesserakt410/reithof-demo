@@ -2,20 +2,29 @@ import { Menu, X, Phone, Mail, Facebook } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useToast } from '../context/ToastContext';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const { showToast } = useToast();
 
   // Vereinfachte Hauptnavigation - nur 5 Items
   const navigation = [
-    { name: 'Startseite', href: '/' },
-    { name: 'Reitunterricht', href: '/reitunterricht' },
-    { name: 'Pferde & Stall', href: '/pferde-stall' },
-    { name: 'Galerie', href: '/galerie' },
-    { name: 'Kontakt', href: '/kontakt' },
+    { name: 'Startseite', href: '/', implemented: true },
+    { name: 'Reitunterricht', href: '/reitunterricht', implemented: false },
+    { name: 'Pferde & Stall', href: '/pferde-stall', implemented: false },
+    { name: 'Galerie', href: '/galerie', implemented: true },
+    { name: 'Kontakt', href: '/kontakt', implemented: false },
   ];
+
+  const handleNavClick = (e, item) => {
+    if (!item.implemented) {
+      e.preventDefault();
+      showToast('Dies ist eine Demo-Website. Bis zur Ausarbeitung steht diese Funktion nicht zur Verfügung.');
+    }
+  };
 
   // Scroll-Detection für Header-Stil
   useEffect(() => {
@@ -39,7 +48,7 @@ export default function Header() {
       `}
     >
       {/* Top Contact Bar */}
-      <div className="bg-primary-500 text-white py-2">
+      <div className="bg-[#2E4A3B] text-white py-2">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-center md:justify-end items-center gap-4 text-sm">
             <a
@@ -74,8 +83,8 @@ export default function Header() {
         <div className="flex justify-between items-center py-4 md:py-5">
           {/* Logo */}
           <Link to="/" className="flex items-center group">
-            <h1 className="text-2xl md:text-3xl font-heading font-bold text-primary-600 group-hover:text-primary-700 transition-colors">
-              Reitstall <span className="text-accent-500">Marienberg</span>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-logo text-primary-600 group-hover:text-primary-700 transition-colors leading-none">
+              Reitstall Marienberg
             </h1>
           </Link>
 
@@ -88,6 +97,7 @@ export default function Header() {
                   <li key={item.name}>
                     <Link
                       to={item.href}
+                      onClick={(e) => handleNavClick(e, item)}
                       className={`
                         relative px-4 py-2 text-base font-medium rounded-lg transition-all
                         ${isActive
@@ -140,6 +150,7 @@ export default function Header() {
                     <li key={item.name}>
                       <Link
                         to={item.href}
+                        onClick={(e) => handleNavClick(e, item)}
                         className={`
                           block px-4 py-3 rounded-lg font-medium transition-all
                           ${isActive

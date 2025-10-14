@@ -96,10 +96,10 @@ export default function Hero({ title, subtitle, description, primaryCTA, seconda
                   <img
                     src={image}
                     alt={title}
-                    className="w-full h-full object-cover aspect-[4/5]"
+                    className="w-full h-auto object-cover rounded-3xl"
                   />
                   {/* Subtle Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent pointer-events-none rounded-3xl" />
                 </div>
 
                 {/* Floating Badge */}

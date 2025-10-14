@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ToastProvider } from './context/ToastContext';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import WirUeberUns from './pages/WirUeberUns';
@@ -19,9 +20,10 @@ import Impressum from './pages/Impressum';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Layout />}>
+    <ToastProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="wir-ueber-uns" element={<WirUeberUns />} />
           <Route path="aktuelles" element={<Aktuelles />} />
@@ -38,9 +40,10 @@ function App() {
           <Route path="galerie" element={<Galerie />} />
           <Route path="empfehlungen" element={<Empfehlungen />} />
           <Route path="impressum" element={<Impressum />} />
-        </Route>
-      </Routes>
-    </Router>
+          </Route>
+        </Routes>
+      </Router>
+    </ToastProvider>
   );
 }
 
